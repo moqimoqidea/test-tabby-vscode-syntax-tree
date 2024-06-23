@@ -1,9 +1,9 @@
 # file name: server.py
 
+import json
 import logging
 import os
 
-import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
@@ -16,7 +16,7 @@ app = FastAPI()
 async def post_completion(request: Request):
     data = await request.json()
     # Assuming 'data' is a dictionary, log a message without logging the data directly
-    logging.info(f"Received POST data: {data}")
+    logging.info(f"Received POST data: {json.dumps(data, indent=2)}")
     return {"message": "Data received", "yourData": data}
 
 @app.get("/v1/health")
