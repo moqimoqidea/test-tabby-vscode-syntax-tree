@@ -6,9 +6,8 @@ import os
 
 import uvicorn
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 
-# Setup logging
 logging.basicConfig(level=logging.INFO)
 
 app = FastAPI()
@@ -24,6 +23,16 @@ async def post_completion(request: Request):
 async def health_check():
     logging.info("Health check queried.")
     return JSONResponse(content={"status": "success", "message": "Service is up and running"}, status_code=200)
+
+@app.options("/v1/health")
+async def health_check_options():
+    headers = {
+        "Access-Control-Allow-Origin": "*",  # 允许所有域名跨域请求，根据实际需要调整
+        "Access-Control-Allow-Methods": "GET, OPTIONS",  # 允许GET和OPTIONS请求方法
+        "Access-Control-Allow-Headers": "*",  # 允许所有头部信息，根据实际需要调整
+    }
+    logging.info("Health check options queried.")
+    return Response(status_code=204, headers=headers)
 
 if __name__ == "__main__":
     host = os.getenv("HOST", "0.0.0.0")
