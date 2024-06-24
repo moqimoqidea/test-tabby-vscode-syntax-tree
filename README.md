@@ -1,3 +1,3 @@
 # Fake Tabby Server
 
-测试 Tabby 在 VS Code 中代码补全携带的语法树内容上下文。
+Test Tabby in VS Code for code completion with syntax tree content context.
