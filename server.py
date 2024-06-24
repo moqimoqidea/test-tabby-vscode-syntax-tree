@@ -27,9 +27,9 @@ async def health_check():
 @app.options("/v1/health")
 async def health_check_options():
     headers = {
-        "Access-Control-Allow-Origin": "*",  # 允许所有域名跨域请求，根据实际需要调整
-        "Access-Control-Allow-Methods": "GET, OPTIONS",  # 允许GET和OPTIONS请求方法
-        "Access-Control-Allow-Headers": "*",  # 允许所有头部信息，根据实际需要调整
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "*",
     }
     logging.info("Health check options queried.")
     return Response(status_code=204, headers=headers)
